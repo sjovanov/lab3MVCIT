@@ -1,0 +1,27 @@
+﻿@model Lab3.Models.FriendModel
+@{
+    ViewBag.Title = "Edit";
+}
+<h2>Edit the friend - @Model.ime</h2>
+@using (Html.BeginForm("EditFriend", "Friend"))
+{
+    <div class="form-group">
+        @Html.LabelFor(m => m.id)
+        @Html.TextBoxFor(m => m.id, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.id)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.ime)
+        @Html.TextBoxFor(m => m.ime, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.ime)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.mestoNaZiveenje)
+        @Html.TextBoxFor(m => m.mestoNaZiveenje, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.mestoNaZiveenje)
+    </div>
+    <div>
+        <button class="btn btn-primary" type="submit">Submit</button>
+        <a href="~/Friend/All" class="btn btn-primary">Back</a>
+    </div>
+}

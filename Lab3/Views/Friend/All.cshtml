@@ -1,0 +1,29 @@
+﻿@model List<Lab3.Models.FriendModel>
+@{
+    ViewBag.Title = "All";
+}
+
+<table class="table text-center">
+    <thead>
+        <tr>
+            <th class="text-center">Friend ID.</th>
+            <th class="text-center">Friend Name</th>
+            <th class="text-center">Place</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @{ 
+            foreach(var prom in Model)
+            {
+                <tr>
+                    <td>@prom.id</td>
+                    <td>@prom.ime</td>
+                    <td>@prom.mestoNaZiveenje</td>
+                    <td>@Html.ActionLink("Edit", "Edit", new { id = prom.id }, new { @class = "btn btn-primary" })@Html.ActionLink("Delete", "DeleteFriend", new { id = prom.id }, new { @class = "btn btn-primary" })</td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+

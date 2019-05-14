@@ -9,7 +9,9 @@ namespace Lab3.Controllers
 {
     public class FriendController : Controller
     {
-        static List<FriendModel> lista = new List<FriendModel>();
+        private static int starId;
+        private static bool flag = true;
+        private static List<FriendModel> lista = new List<FriendModel>();
         // GET: Friend
         public ActionResult Index()
         {
@@ -43,22 +45,34 @@ namespace Lab3.Controllers
             return View(prijatel);
         }
 
-        public ActionResult EditFriend(FriendModel prijatel)
+        public ActionResult EditFriend(FriendModel prijatel, FormCollection fc)
         {
+            if (!ModelState.IsValid && flag)// Ova e za da mozhe da se izmeni i pokraj toa shto bi se napravilo greshka da ne se vnese id ime ili mesto nekolku pati
+            {
+                flag = false;
+                starId = Convert.ToInt32(fc["StarID"]);
+            }
+            else if(flag)
+            {
+                flag = false;
+                starId = Convert.ToInt32(fc["StarID"]);
+            }
             if (!ModelState.IsValid)
             {
-                return View("Edit", prijatel.id);
+                return View("Edit", prijatel);
             }
-            FriendModel pomoshen = lista.Single(m => m.id == prijatel.id);
+            FriendModel pomoshen = lista.Single(m => m.id == starId);
             pomoshen.id = prijatel.id;
             pomoshen.ime = prijatel.ime;
             pomoshen.mestoNaZiveenje = prijatel.mestoNaZiveenje;
+            flag = true;
             return View("All", lista);
         }
 
         public ActionResult DeleteFriend(int id)
         {
-            lista.RemoveAt(id);
+            FriendModel pomoshen = lista.Single(m => m.id == id);
+            lista.Remove(pomoshen);
             return View("All", lista);
         }
     }

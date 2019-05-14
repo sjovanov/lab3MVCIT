@@ -5,6 +5,7 @@
 <h2>Edit the friend - @Model.ime</h2>
 @using (Html.BeginForm("EditFriend", "Friend"))
 {
+    @Html.Hidden("StarID",Model.id)
     <div class="form-group">
         @Html.LabelFor(m => m.id)
         @Html.TextBoxFor(m => m.id, new { @class = "form-control" })

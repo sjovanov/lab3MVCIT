@@ -78,3 +78,9 @@ C:\Users\Lenovo Z510\source\repos\Lab3\Lab3\bin\Microsoft.CodeDom.Providers.DotN
 C:\Users\Lenovo Z510\source\repos\Lab3\Lab3\obj\Debug\Lab3.csproj.CopyComplete
 C:\Users\Lenovo Z510\source\repos\Lab3\Lab3\obj\Debug\Lab3.dll
 C:\Users\Lenovo Z510\source\repos\Lab3\Lab3\obj\Debug\Lab3.pdb
+C:\Users\Lenovo Z510\source\repos\Lab3\Lab3\bin\EntityFramework.dll
+C:\Users\Lenovo Z510\source\repos\Lab3\Lab3\bin\EntityFramework.SqlServer.dll
+C:\Users\Lenovo Z510\source\repos\Lab3\Lab3\bin\EntityFramework.xml
+C:\Users\Lenovo Z510\source\repos\Lab3\Lab3\bin\EntityFramework.SqlServer.xml
+C:\Users\Lenovo Z510\source\repos\Lab3\Lab3\obj\Debug\Lab3.Migrations.initial.resources
+C:\Users\Lenovo Z510\source\repos\Lab3\Lab3\obj\Debug\Lab3.csproj.GenerateResource.cache

@@ -1,6 +1,7 @@
 ﻿using Lab3.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -12,6 +13,7 @@ namespace Lab3.Controllers
         private static int starId;
         private static bool flag = true;
         private static List<FriendModel> lista = new List<FriendModel>();
+        private FriendModelDbContext db = new FriendModelDbContext();
         // GET: Friend
         public ActionResult Index()
         {
@@ -20,16 +22,27 @@ namespace Lab3.Controllers
 
         public ActionResult All()
         {
-            return View(lista);
+            return View(db.Prijateli.ToList());
         }
 
         public ActionResult Add()
         {
-            FriendModel prijatel = new FriendModel();
-            return View(prijatel);
+            return View();
         }
 
-        public ActionResult AddNewFriend(FriendModel prijatel)
+        [HttpPost]
+        public ActionResult Add(FriendModel fr)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Prijateli.Add(fr);
+                db.SaveChanges();
+                return RedirectToAction("All");
+            }
+            return View(fr);
+        }
+
+    /*    public ActionResult AddNewFriend(FriendModel prijatel)
         {
             if (!ModelState.IsValid)
             {
@@ -37,14 +50,26 @@ namespace Lab3.Controllers
             }
             lista.Add(prijatel);
             return View("All", lista);
-        }
+        }*/
 
-        public ActionResult Edit(int id)
+        public ActionResult Edit(int? id)
         {
-            var prijatel = lista.Single(m => m.id == id);
+            var prijatel = db.Prijateli.Find(id);
             return View(prijatel);
         }
 
+        [HttpPost]
+        public ActionResult Edit([Bind(Include = "id,ime,mestoNaZiveenje")] FriendModel friendModel)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(friendModel).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("All");
+            }
+            return View(friendModel);
+        }
+        /*
         public ActionResult EditFriend(FriendModel prijatel, FormCollection fc)
         {
             if (!ModelState.IsValid && flag)// Ova e za da mozhe da se izmeni i pokraj toa shto bi se napravilo greshka da ne se vnese id ime ili mesto nekolku pati
@@ -68,12 +93,13 @@ namespace Lab3.Controllers
             flag = true;
             return View("All", lista);
         }
-
-        public ActionResult DeleteFriend(int id)
+        */
+        public ActionResult DeleteFriend(int? id)
         {
-            FriendModel pomoshen = lista.Single(m => m.id == id);
-            lista.Remove(pomoshen);
-            return View("All", lista);
+            var prijatel = db.Prijateli.Find(id);
+            db.Prijateli.Remove(prijatel);
+            db.SaveChanges();
+            return RedirectToAction("All");
         }
     }
 }

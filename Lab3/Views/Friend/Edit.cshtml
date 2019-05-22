@@ -3,7 +3,7 @@
     ViewBag.Title = "Edit";
 }
 <h2>Edit the friend - @Model.ime</h2>
-@using (Html.BeginForm("EditFriend", "Friend"))
+@using (Html.BeginForm())
 {
     @Html.Hidden("StarID",Model.id)
     <div class="form-group">
